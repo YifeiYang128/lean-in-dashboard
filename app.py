@@ -23,7 +23,7 @@ from data_generator import load_all
 # ─────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Lean In | Mission Dashboard",
-    page_icon="https://leanin.org/favicon.ico",
+    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded",
 )
