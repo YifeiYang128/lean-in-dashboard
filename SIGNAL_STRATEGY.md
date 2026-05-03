@@ -1,124 +1,49 @@
-# Signal Strategy — Lean In Data Scientist Assignment
-**Part 1: Which signals I'd measure and why**
+# Signal Strategy — Lean In Mission Dashboard
+
+**What should we measure — and why?**
 
 ---
 
-## The Framing Question
-
-Before picking metrics, I asked: *what decision does each metric enable?*
-
-Lean In has one north star: **accelerate women's advancement into leadership**. Every signal I chose must connect to that — either by measuring outcomes directly, tracking the community engine that drives them, or providing early warning when something is breaking.
-
-I also deliberately ruled out vanity metrics (total registered users, website traffic) that look good in headlines but don't predict mission success.
+Lean In's north star is accelerating women's advancement into leadership. Before selecting any metric, I asked one question: *does this signal connect to that goal, or does it just look good in a report?* The nine signals below are grouped into three tiers based on how directly they answer the mission question.
 
 ---
 
-## Tier 1 — Mission-Critical (Non-negotiable)
+## Signal Table
 
-### 1. Member Promotion Rate
-**What it measures**: % of Circle members promoted within a 12-month cohort window.  
-**Why it matters**: This is Lean In's impact claim — "women in Circles are nearly 2× as likely to be promoted." If we can't measure it, we can't defend it. If we can measure it, it's the single most powerful signal for fundraising, corporate partnerships, and organizational legitimacy.  
-**Formula**: `# members promoted / # members tracked over trailing 12 months`  
-**Segments to track**: By seniority level (the broken rung is at IC→Manager), industry, and Circle type (Workplace vs. Community).  
-**Limitation**: Self-reported data with selection bias — more ambitious women join Circles. Requires a matched control group for causal claims.
-
----
-
-### 2. Active Circle Rate
-**What it measures**: % of registered Circles with ≥1 meeting in the past 30 days.  
-**Why it matters**: A dormant Circle is a broken promise. This is the leading indicator for all downstream outcomes — a Circle that doesn't meet generates no advancement, no support, no NPS. Track weekly; alert when it drops below 75%.  
-**Formula**: `Circles with ≥1 meeting in last 30 days / Total registered circles`  
-**Limitation**: Meeting frequency doesn't capture meeting quality. Needs to be paired with attendance rate and NPS to tell the full story.
+| # | Signal | What it tells you | Limitation | Why it matters for Lean In |
+|---|--------|-------------------|------------|----------------------------|
+| 1 | **Member Promotion Rate** | % of Circle members promoted within a 12-month window | Self-reported; motivated women are more likely to join Circles (selection bias) — correlation, not causation without a control group | This is Lean In's core impact claim: Circle members are nearly 2× as likely to be promoted. If we can't measure it rigorously, we can't defend it to funders or partners. |
+| 2 | **Active Circle Rate** | % of Circles with ≥1 meeting in the past 30 days | Frequency doesn't capture quality — a circle can technically be "active" with low engagement | A dormant Circle generates no support, no outcomes, no NPS. This is the leading indicator for everything downstream. Target: >75%. |
+| 3 | **Circle NPS** | Would members recommend their Circle to another woman? (0–10) | Lags real experience by weeks; low survey response rates can skew results | Single leadership-legible number that captures community health. A declining NPS is the earliest warning signal before churn or promotion data moves. |
+| 4 | **New Circles Started (MoM)** | Monthly growth in new Circles launched | Quantity ≠ quality — a spike in starts followed by early churn is a marketing problem, not a win | Tracks the pipeline of future impact and the effectiveness of the onboarding funnel. |
+| 5 | **Corporate Partners** | # organizations actively running Circles for Companies | Partner count ≠ employee participation — utilization rate within companies matters equally | One corporate partner can reach thousands of women at once. This is Lean In's institutional force multiplier and primary revenue signal. |
+| 6 | **Geographic Reach** | # countries with ≥1 active Circle | Breadth can mask shallow penetration — 1 circle in 50 countries is weaker than 50 circles in one country | Lean In's mission is explicitly global. Reach signals movement legitimacy to funders and the public. |
+| 7 | **Circle Lifecycle Funnel** | % of new Circles reaching each milestone: 1st meeting → 3rd → 6th → annual | Only actionable if there are intervention mechanisms in place (nudges, facilitator outreach) | The 3rd meeting is the "sticky threshold" — circles that reach it are far more likely to survive. This funnel shows exactly where to intervene. |
+| 8 | **Engagement Depth** | Avg sessions attended per member (trailing 6 months) | Average masks the split between power users and lurkers — median tells a better story | There is a clear dose-response: members with 16+ sessions are promoted at nearly 2× the rate of those with 1–3 sessions. Depth drives outcomes. |
+| 9 | **Facilitator Training Rate** | % of Circle leaders who completed facilitator training | Training completion ≠ training quality or real capability | Trained facilitators run better Circles across every metric. This is an input we control directly — the most actionable lever in the system. |
 
 ---
 
-### 3. Circle NPS (Net Promoter Score)
-**What it measures**: "How likely are you to recommend your Circle to a friend?" (0–10 scale)  
-**Why it matters**: NPS is the CEO-legible single number that captures community health. Circles where women feel supported and valued will retain members and generate referrals — the organic growth engine. A declining NPS is the earliest signal that something is wrong before we see it in churn or promotion data.  
-**Formula**: `% Promoters (9–10) − % Detractors (0–6)`  
-**Target**: >60 (currently at ~65 for active circles with facilitator training)  
-**Limitation**: Survey response bias; lags real experience by weeks. Segment by Circle type to diagnose.
+## What I deliberately left out
+
+**Website traffic, social media followers, total registered members, curriculum downloads** — none of these connect reliably to the mission outcome. Total registered members, for example, is inflated by dormant accounts and tells us nothing about whether women are advancing.
 
 ---
 
-## Tier 2 — Growth & Scale
-
-### 4. New Circles Started (Month-over-Month)
-**What it measures**: Number of new Circles launched each month.  
-**Why it matters**: Pipeline of future impact. Also tracks the effectiveness of our recruitment/onboarding funnel.  
-**Key insight**: Watch the ratio of new circles started to new circles that survive 90 days. A spike in starts followed by early churn = a marketing problem, not a product win.
-
----
-
-### 5. Geographic Reach (# Countries with Active Circles)
-**What it measures**: Number of countries with ≥1 active Circle.  
-**Why it matters**: Lean In's mission is explicitly global. Breadth signals movement legitimacy to funders and partners. Tracks whether growth is concentrated or genuinely distributed.  
-**Limitation**: 1 circle in 50 countries tells a worse story than 50 circles in 1 country. Pair with depth metrics (circles per 1M women in workforce).
-
----
-
-### 6. Corporate Partners (Circles for Companies)
-**What it measures**: # organizations actively running Circles for Companies programs.  
-**Why it matters**: Corporate partnerships are a force multiplier — one partnership can reach thousands of women at once and drives systematic change inside organizations. This is also Lean In's primary revenue signal.  
-**Limitation**: Count doesn't equal utilization. Track active employee participation rate within partner companies.
-
----
-
-## Tier 3 — Health & Early Warning
-
-### 7. Circle Lifecycle Funnel (Founded → 3rd Meeting)
-**What it measures**: % of new circles reaching each milestone — First Meeting, 3rd Meeting, 6th Meeting, Annual.  
-**Why it matters**: The 3rd meeting is the "sticky threshold" — circles that reach it are dramatically more likely to survive. This funnel tells us where to intervene (automated nudges at day 14 and day 45 have shown impact in community platform research).  
-**Formula**: Cohort conversion rate per milestone window.
-
----
-
-### 8. Engagement Depth (Avg Sessions Attended per Member)
-**What it measures**: Average number of sessions a member attends over trailing 6 months.  
-**Why it matters**: There's a clear dose-response relationship — members with 16+ sessions are promoted at nearly double the rate of those with 1–3 sessions. This is the engagement depth signal most predictive of outcomes. Focus retention on getting members past session 8.  
-**Limitation**: Average masks the bimodal distribution (power users vs. lurkers). Track median and P25.
-
----
-
-### 9. Facilitator Training Adoption Rate
-**What it measures**: % of Circle leaders who have completed facilitator training.  
-**Why it matters**: Trained facilitators run better Circles — higher attendance, lower churn, higher NPS. This is an input metric and an actionable lever. We control it directly through our programs.  
-**Formula**: `# circle leaders with training completed / # active circle leaders`  
-**Target**: >65%
-
----
-
-## What I Deliberately Left Out
-
-- **Website traffic / page views**: Doesn't connect to mission outcomes.
-- **Social media followers**: Awareness ≠ impact.
-- **Total registered members**: Inflated by dormant accounts. Active members is the right denominator.
-- **Curriculum downloads**: Proxy too removed from outcomes.
-
----
-
-## The Signal Hierarchy (Summary)
+## Signal hierarchy
 
 ```
 NORTH STAR: Women advancing into leadership
     │
-    ├── OUTCOME: Member Promotion Rate  (did it work?)
+    ├── OUTCOME        Member Promotion Rate
     │
-    ├── COMMUNITY ENGINE:
-    │       Active Circle Rate           (are circles alive?)
-    │       Circle NPS                   (are circles valued?)
-    │       Engagement Depth             (are members going deep?)
+    ├── COMMUNITY      Active Circle Rate · Circle NPS · Engagement Depth
     │
-    ├── SCALE:
-    │       New Circles MoM              (are we growing?)
-    │       Geographic Reach             (are we global?)
-    │       Corporate Partners           (are we institutional?)
+    ├── SCALE          New Circles MoM · Corporate Partners · Geographic Reach
     │
-    └── EARLY WARNING:
-            Circle Lifecycle Funnel      (where do circles die?)
-            Facilitator Training Rate    (are leaders equipped?)
+    └── EARLY WARNING  Circle Lifecycle Funnel · Facilitator Training Rate
 ```
 
 ---
 
-*"Metrics are a proxy for truth — they're incomplete. Context always matters."*
+*Prepared by Yifei Yang · May 2025*

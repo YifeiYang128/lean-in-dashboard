@@ -1,110 +1,116 @@
-# Lean In — Data Scientist Take-Home Assignment
+# Lean In — Mission Dashboard
 
-**Candidate submission** · May 2025
+A Streamlit analytics dashboard built for Lean In's Data Scientist take-home assignment. It surfaces the signals that tell you whether Lean In is actually advancing women's careers — community growth, circle health, member promotion outcomes, and geographic reach — using synthetic data calibrated to Lean In's known scale.
 
 ---
 
-## What's in this repo
+## Project structure
 
 ```
-leanin_dashboard/
-├── app.py                # Streamlit dashboard (Part 2)
-├── data_generator.py     # Synthetic data engine (seeded, reproducible)
-├── requirements.txt
-├── SIGNAL_STRATEGY.md    # Part 1 signal rationale (also embedded in dashboard Tab 5)
+├── app.py               # Streamlit dashboard (main entry point)
+├── data_generator.py    # Synthetic data engine (seeded, fully reproducible)
+├── requirements.txt     # Python dependencies
+├── SIGNAL_STRATEGY.md   # Written signal rationale (also embedded in dashboard Tab 5)
 └── README.md
 ```
 
 ---
 
-## Running the dashboard
+## Quickstart
+
+You need Python 3.9+ installed. No API keys or external data required — all data is generated locally.
 
 ```bash
-# 1. Clone / unzip this repo
-# 2. Create a virtual environment (optional but recommended)
-python -m venv .venv && source .venv/bin/activate   # or .venv\Scripts\activate on Windows
+# 1. Clone the repo
+git clone https://github.com/YifeiYang128/lean-in-dashboard.git
+cd lean-in-dashboard
+
+# 2. Create a virtual environment (recommended)
+python -m venv .venv
+source .venv/bin/activate        # Mac / Linux
+# .venv\Scripts\activate         # Windows
 
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Run
+# 4. Launch
 streamlit run app.py
 ```
 
-The dashboard opens at `http://localhost:8501`. No API keys or external data needed — everything is generated locally from a seeded random engine.
+The dashboard opens automatically at `http://localhost:8501`.
 
 ---
 
-## What I built
+## What's inside
 
-### Part 1 — Signal Strategy (see Tab 5 in the dashboard or SIGNAL_STRATEGY.md)
+### Part 1 — Signal strategy
 
-I chose **9 signals across 3 tiers**, deliberately sequenced from mission-critical to operational:
+Nine signals across three tiers, each chosen because it connects directly to the mission: *are women advancing?*
 
-| Tier | Signal | Frequency |
-|------|--------|-----------|
-| 🔵 Mission-Critical | Member Promotion Rate | Quarterly cohort |
-| 🔵 Mission-Critical | Active Circle Rate | Weekly |
-| 🔵 Mission-Critical | Circle NPS | Quarterly survey |
-| 🟢 Growth & Scale | New Circles Started (MoM) | Monthly |
-| 🟢 Growth & Scale | Geographic Reach (# Countries) | Quarterly |
-| 🟢 Growth & Scale | Corporate Partners | Monthly |
-| 🟡 Health & Early Warning | Circle Lifecycle Funnel | Monthly cohort |
-| 🟡 Health & Early Warning | Sessions Attended per Member | Monthly |
-| 🟡 Health & Early Warning | Facilitator Training Adoption | Monthly |
+| Tier | Signal | Cadence |
+|------|--------|---------|
+| Mission-Critical | Member Promotion Rate | Quarterly cohort |
+| Mission-Critical | Active Circle Rate | Weekly |
+| Mission-Critical | Circle NPS | Quarterly survey |
+| Growth & Scale | New Circles Started (MoM) | Monthly |
+| Growth & Scale | Geographic Reach | Quarterly |
+| Growth & Scale | Corporate Partners | Monthly |
+| Health & Early Warning | Circle Lifecycle Funnel | Monthly cohort |
+| Health & Early Warning | Sessions Attended per Member | Monthly |
+| Health & Early Warning | Facilitator Training Adoption | Monthly |
 
-**The reasoning logic**: Every signal earns its place by connecting to one of three questions:
-1. Are women actually advancing? (outcome)
-2. Is the community growing? (scale)
-3. Are circles healthy enough to survive? (health / early warning)
+The full rationale — what each signal tells you, what it can't, and why it matters — lives in [SIGNAL_STRATEGY.md](./SIGNAL_STRATEGY.md) and in the **Signal Strategy** tab of the dashboard.
 
 ### Part 2 — Dashboard
 
-Five layers, each with a distinct audience question:
+Five tabs, each answering a distinct leadership question:
 
-| Tab | CEO Question Answered |
-|-----|-----------------------|
-| 📈 Growth & Reach | "Are we growing fast enough?" |
-| ⭕ Circle Health | "Are circles actually working?" |
-| 🚀 Member Advancement | "Are women getting promoted?" |
-| 🌍 Geographic Expansion | "Where are we strong / where are gaps?" |
-| 🔍 Signal Strategy | "Why did you measure these things?" |
+| Tab | Question it answers |
+|-----|---------------------|
+| Growth & Reach | Are we growing fast enough? |
+| Circle Health | Are circles actually working? |
+| Member Advancement | Are women getting promoted? |
+| Geographic Expansion | Where are we strong, where are the gaps? |
+| Signal Strategy | Why did we measure these things? |
 
-**Interactive features**: date range filter, country/industry/circle-type filters (sidebar), metric selector on geo tab, funnel chart, Sankey diagram for career transitions, dose-response chart for session depth.
+**Interactive controls (sidebar):**
+- Date range slider
+- Country, circle type, and industry filters
+- All charts update in real time based on selections
+
+**Chart types used:** dual-axis time series, funnel chart, donut, grouped bar, scatter, choropleth map, horizontal bar.
 
 ---
 
-## Tools used
+## Data
 
-| Tool | Used for |
+All data is synthetic and generated by `data_generator.py` using a fixed random seed — meaning every run produces the same numbers. The data is calibrated to reflect Lean In's known footprint (150,000+ circles globally, 183 countries, ~2× promotion lift for Circle members vs. non-members).
+
+No real user data is used. All figures are illustrative.
+
+---
+
+## Tools
+
+| Tool | Purpose |
 |------|---------|
-| **Claude (Anthropic)** | Architecture design, data model, narrative framing, code generation, copy |
-| **Python / Pandas / NumPy** | Data generation + transformation |
-| **Streamlit** | Dashboard framework |
-| **Plotly** | All charts (Sankey, funnel, choropleth, dual-axis, scatter) |
+| Python / Pandas | Data generation and transformation |
+| Streamlit | Dashboard framework |
+| Plotly | All interactive charts |
+| Claude (Anthropic) | Architecture design, data modeling, narrative framing, code generation |
 
 ---
 
-## What I'd do with more time
+## If I had more time
 
-1. **Causal identification**: The promotion lift claim needs a matched-cohort study to rule out self-selection. Women who join Circles skew more ambitious to begin with — we need to control for that.
+1. **Causal identification** — The promotion lift claim needs a matched-cohort study to rule out self-selection bias. Women who join Circles tend to be more ambitious to begin with; a control group is needed for a defensible causal estimate.
 
-2. **Predictive at-risk model**: A logistic regression (or gradient boosting) on circle attributes at day 30 to predict churn — so we can trigger facilitator outreach before a circle dies.
+2. **Predictive at-risk model** — A classifier trained on circle attributes at day 30 (attendance trend, days since last meeting, facilitator trained) to predict churn before it happens, triggering proactive outreach.
 
-3. **NLP on open-text NPS**: The *why* behind satisfaction is in the comments, not the number. Tag themes driving detraction.
+3. **NLP on NPS open-text** — The *why* behind member satisfaction lives in comments, not the score. Tagging themes driving detraction would make NPS actionable, not just directional.
 
-4. **The 'Broken Rung' tracker**: The biggest structural barrier is the IC→Manager transition. If corporate partners share promotion data by gender, we can track whether Lean In is moving this needle.
-
-5. **Real platform instrumentation**: Login events, curriculum completion, peer messaging — build a true engagement score that predicts long-term retention.
+4. **The Broken Rung tracker** — The IC→Manager transition is the single biggest structural barrier for women. If corporate partners share anonymized promotion data by gender, we could track whether Lean In is actually moving this needle.
 
 ---
 
-## Notes for the reviewer
-
-- The synthetic data is **seeded** (reproducible) and calibrated to Lean In's known numbers: 100,000+ circles, 183 countries, ~2× promotion lift claim.
-- The dashboard uses Lean In's brand colors and is designed for a non-technical CEO who asks: *"Is the mission working?"*
-- Signal strategy tab includes explicit limitations for each metric — because knowing what data *can't* tell you is as important as knowing what it can.
-
----
-
-*Questions? Reach out to [your email] | GitHub: [your handle]*
+*Submitted by Yifei Yang · May 2025*
