@@ -1,7 +1,7 @@
 """
 data_generator.py
 -----------------
-Generates realistic synthetic data for the Lean In CEO Dashboard.
+Generates realistic synthetic data for the dashboard.
 All data reflects Lean In's mission context: Circles growth, member engagement,
 career advancement outcomes, and geographic expansion.
 
